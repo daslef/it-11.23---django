@@ -1,0 +1,11 @@
+{% if not recent_questions %}
+<h2>No recent posts...</h2>
+{% else %}
+<h2>Recent posts</h2>
+{% for question in recent_questions %}
+<p>
+    <span>{{ question.question_text }}</span>
+    <span>{{ question.choice_set.count }}</span>
+</p>
+{% endfor %}
+{% endif %}
