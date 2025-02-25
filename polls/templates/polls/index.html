@@ -4,8 +4,7 @@
 <h2>Recent posts</h2>
 {% for question in recent_questions %}
 <p>
-    <span>{{ question.question_text }}</span>
-    <span>{{ question.choice_set.count }}</span>
+    <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
 </p>
 {% endfor %}
 {% endif %}
