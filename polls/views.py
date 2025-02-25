@@ -2,6 +2,7 @@ from django.db.models import F
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
+from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from . import models
 
@@ -10,12 +11,16 @@ class IndexView(generic.ListView):
     context_object_name = "two_recent_questions"
 
     def get_queryset(self):
-        return models.Question.objects.order_by("-pub_date")[:2]
+        return models.Question.objects.filter(pub_date__lte=timezone.now()).order_by(
+            "-pub_date"
+        )[:2]
 
 
 class DetailView(generic.DetailView):
-    model = models.Question
     pk_url_kwarg = "question_id"
+
+    def get_queryset(self):
+        return models.Question.objects.filter(pub_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):

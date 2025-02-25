@@ -1,7 +1,7 @@
 {% if not two_recent_questions %}
-<h2>No recent posts...</h2>
+<h2>No recent polls...</h2>
 {% else %}
-<h2>Recent posts</h2>
+<h2>Recent polls</h2>
 {% for question in two_recent_questions %}
 <p>
     <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
