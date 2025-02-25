@@ -21,4 +21,6 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.choice_text[:5] + "..." + str(self.votes)
+        return (
+            f"{self.choice_text[:5]} (Question {self.question.id}, Votes: {self.votes})"
+        )
