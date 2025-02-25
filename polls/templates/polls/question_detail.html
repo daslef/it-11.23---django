@@ -1,3 +1,11 @@
+<nav>
+    <ul>
+        <li>
+            <a href="{% url "polls:index" %}">To polls list</href>
+        </li>
+    </ul>
+</nav>
+
 <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
     <fieldset>
