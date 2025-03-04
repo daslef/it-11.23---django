@@ -10,12 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+TESTING = "test" in sys.argv
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -32,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "polls.apps.PollsConfig",
+    "django_daisy",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,6 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+if not TESTING:
+    INSTALLED_APPS.insert(0, "debug_toolbar")
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -50,12 +55,15 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+if not TESTING:
+    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+
 ROOT_URLCONF = "mysite.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "mysite" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -98,6 +106,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 
