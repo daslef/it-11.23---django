@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "polls.apps.PollsConfig",
+    "account.apps.AccountConfig",
     "django_daisy",
     "django.contrib.admin",
     "django.contrib.auth",

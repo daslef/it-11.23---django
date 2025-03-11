@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block 'title' %}Login Page{% endblock %}
+
+{% block 'main' %}
+<form action="{% url 'account:login' %}" method="post">
+  {% csrf_token %}
+  <fieldset>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <section class="m-2">
+      <label for="username" class="label">Username</label>
+      <input type="text" class="input" name="username" id="username">
+    </section>
+    <section class="m-2">
+      <label for="password" class="label">Password</label>
+      <input type="password" class="input" name="password" id="password">
+    </section>
+  </fieldset>
+  <button class="btn btn-primary" type="submit">Vote</button>
+</form>
+{% endblock %}
