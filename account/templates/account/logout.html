@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block 'title' %}Logout Page{% endblock %}
+
+{% block 'main' %}
+<p>You will be redirected on login page <span class="timer">3</span></p>
+{% endblock %}
+
+{% block 'js' %}
+<script>
+  const timer = document.querySelector('.timer')
+  const timerInterval = setInterval(() => {
+    timer.textContent = String(Number(timer.textContent) - 1)
+  }, 1000)
+
+  setTimeout(() => {
+    clearInterval(timerInterval)
+    location.replace("{% url 'account:login' %}")
+  }, 3000)
+</script>
+{% endblock %}

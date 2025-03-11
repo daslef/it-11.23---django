@@ -26,7 +26,17 @@
         <li>
           <a href="{% url "polls:index" %}">To polls list</a>
         </li>
+        {% if request.user.is_authenticated %}
         <li>{{ request.user.username }}</li>
+        {% endif %}
+          <li>
+            {% if request.user.is_authenticated %}
+            <a href="{% url "account:logout" %}">Logout</a>
+            {% else %}
+            <a href="{% url "account:login" %}">Login</a>
+            <a href="{% url "account:signup" %}">Signup</a>
+            {% endif %}
+          </li>
       </ul>
     </div>
   </div>

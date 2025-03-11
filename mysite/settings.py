@@ -136,3 +136,9 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Auth URLs
+
+LOGIN_REDIRECT_URL = "polls:index"
+LOGIN_URL = "account:login"
+LOGOUT_URL = "account:logout"

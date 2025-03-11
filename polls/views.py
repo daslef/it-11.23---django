@@ -1,8 +1,10 @@
 from django.db.models import F
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from . import models
 
@@ -16,7 +18,7 @@ class IndexView(generic.ListView):
         )[:2]
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
     pk_url_kwarg = "question_id"
 
     def get_queryset(self):
@@ -45,3 +47,8 @@ def vote(request, question_id):
         selected_choice.votes = F("votes") + 1
         selected_choice.save()
         return HttpResponseRedirect(reverse("polls:results", args=(question_id,)))
+
+
+@login_required
+def secured(request):
+    return HttpResponse("Here")
