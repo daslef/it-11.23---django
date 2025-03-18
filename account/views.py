@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 
 from .forms import LoginForm, SignupForm, ProfileForm
 from .models import ProfileModel
+from .mixins import UserRelatedMixin
 
 
-class UserProfileView(UpdateView):
+class UserProfileView(UserRelatedMixin, UpdateView):
     model = ProfileModel
     form_class = ProfileForm
     # fields = ["user", "avatar"]

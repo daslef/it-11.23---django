@@ -14,7 +14,9 @@ class SignupForm(forms.ModelForm):
         fields = ["username", "email"]
 
     password = forms.CharField(widget=forms.PasswordInput)
-    password_confirm = forms.CharField(widget=forms.PasswordInput)
+    password_confirm = forms.CharField(
+        widget=forms.PasswordInput, label="Password Repeat"
+    )
 
     def clean_password_confirm(self):
         cleaned = self.cleaned_data
