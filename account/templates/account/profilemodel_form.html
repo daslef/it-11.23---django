@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block 'title' %}Profile Page{% endblock %}
+
+{% block 'main' %}
+<h2>Profile</h2>
+<form action="" method="post" novalidate enctype="multipart/form-data">
+  {% csrf_token %}
+  <fieldset>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {{ form.as_p }}
+  </fieldset>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
+from .models import ProfileModel
 
 
 class LoginForm(forms.Form):
@@ -20,3 +21,9 @@ class SignupForm(forms.ModelForm):
         if cleaned["password"] != cleaned["password_confirm"]:
             raise forms.ValidationError("Password doesn't match")
         return cleaned["password_confirm"]
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = ProfileModel
+        fields = ["user", "avatar"]

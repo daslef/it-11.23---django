@@ -1,8 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
 
-from .forms import LoginForm, SignupForm
+from .forms import LoginForm, SignupForm, ProfileForm
 from .models import ProfileModel
+
+
+class UserProfileView(UpdateView):
+    model = ProfileModel
+    form_class = ProfileForm
+    # fields = ["user", "avatar"]
 
 
 def user_logout(request):
