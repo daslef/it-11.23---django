@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 
 from .forms import LoginForm, SignupForm
+from .models import ProfileModel
 
 
 def user_logout(request):
@@ -25,7 +26,7 @@ def user_signup(request):
     new_user = form.save(commit=False)
     new_user.set_password(form.cleaned_data["password_confirm"])
     new_user.save()
-    print(new_user)
+    ProfileModel.objects.create(user=new_user)
 
     # if not user:
     #     return render(
